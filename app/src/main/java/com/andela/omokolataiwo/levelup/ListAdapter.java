@@ -15,7 +15,7 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder>{
+public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     private List<ItemList> userProfilesDataSet;
     private Context context;
 
@@ -23,6 +23,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder>{
         this.userProfilesDataSet = itemList;
         this.context = context;
     }
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
@@ -48,8 +49,8 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder>{
 
         public ViewHolder(View itemView) {
             super(itemView);
-            profilePictureImageView = (CircleImageView) itemView.findViewById(R.id.imageView);
-            usernameTextView = itemView.findViewById(R.id.username);
+            profilePictureImageView = itemView.findViewById(R.id.img_user_profile);
+            usernameTextView = itemView.findViewById(R.id.tv_username);
         }
     }
 }

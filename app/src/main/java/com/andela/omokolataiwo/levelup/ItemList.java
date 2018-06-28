@@ -5,6 +5,7 @@ import android.net.Uri;
 public class ItemList {
     private String mUsername;
     private String mProfilePicture;
+
     public ItemList(String username, String picture) {
         mUsername = username;
         mProfilePicture = picture;

@@ -21,13 +21,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        recyclerView = findViewById(R.id.recyclerView);
+        recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         adapter = new ListAdapter(githubUserProfile, this);
         recyclerView.setAdapter(adapter);
     }
+
     static {
         githubUserProfile.add(new ItemList("@Leumas", "https://avatars2.githubusercontent.com/u/8110201?v=4"));
 
