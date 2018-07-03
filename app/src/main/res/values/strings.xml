@@ -1,5 +1,7 @@
 <resources>
-    <string name="app_name">Github Android Devs.</string>
+    <string name="app_name">Github Java Devs.</string>
     <string name="user_image">user image</string>
     <string name="user_name">Github Username</string>
+    <string name="github_username">Github Username</string>
+    <string name="http_github_com_username">http://github.com/username</string>
 </resources>

@@ -27,8 +27,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.user_card_list, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.user_card_list, parent, false);
         return new ViewHolder(v);
     }
 
@@ -37,16 +36,18 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         ItemList itemList = userProfilesDataSet.get(position);
         final String username = itemList.getUsername();
         final String profileImage = itemList.getProfilePicture();
+        final String USER_NAME = "username";
+        final String PROFILE_IMAGE = "profile image";
 
         holder.usernameTextView.setText(username);
         Picasso.get().load(profileImage).into(holder.profilePictureImageView);
 
-        holder.itemView.setOnClickListener( new View.OnClickListener() {
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, DetailActivity.class);
-                intent.putExtra("USER_NAME", username);
-                intent.putExtra("PROFILE_IMAGE", profileImage);
+                intent.putExtra(USER_NAME, username);
+                intent.putExtra(PROFILE_IMAGE, profileImage);
                 context.startActivity(intent);
             }
         });
