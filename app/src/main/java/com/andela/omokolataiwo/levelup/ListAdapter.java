@@ -1,6 +1,7 @@
 package com.andela.omokolataiwo.levelup;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -34,8 +35,23 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         ItemList itemList = userProfilesDataSet.get(position);
-        holder.usernameTextView.setText(itemList.getUsername());
-        Picasso.get().load(itemList.getProfilePicture()).into(holder.profilePictureImageView);
+        final String username = itemList.getUsername();
+        final String profileImage = itemList.getProfilePicture();
+        final String USER_NAME = "username";
+        final String PROFILE_IMAGE = "profile image";
+
+        holder.usernameTextView.setText(username);
+        Picasso.get().load(profileImage).into(holder.profilePictureImageView);
+
+        holder.itemView.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, DetailActivity.class);
+                intent.putExtra(USER_NAME, username);
+                intent.putExtra(PROFILE_IMAGE, profileImage);
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
