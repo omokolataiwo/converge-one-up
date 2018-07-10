@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,7 +29,8 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.user_card_list, parent, false);
+        View v = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.user_card_list, parent, false);
         return new ViewHolder(v);
     }
 
@@ -39,10 +39,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         GithubProfile itemList = userProfilesDataSet.get(position);
         final String username = itemList.getLogin();
         final String profileImage = itemList.getAvatarUrl();
-        final  String profileUrl = itemList.getHtmlUrl();
-        final String USER_NAME = "username";
-        final String PROFILE_IMAGE = "profile image";
-        final String PROFILE_URL = "profile url";
+        final String profileUrl = itemList.getHtmlUrl();
 
         holder.usernameTextView.setText(username);
         Picasso.get().load(profileImage).into(holder.profilePictureImageView);
@@ -51,9 +48,9 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, DetailActivity.class);
-                intent.putExtra(USER_NAME, username);
-                intent.putExtra(PROFILE_IMAGE, profileImage);
-                intent.putExtra(PROFILE_URL, profileUrl);
+                intent.putExtra("username", username);
+                intent.putExtra("profile image", profileImage);
+                intent.putExtra("profile url", profileUrl);
 
                 context.startActivity(intent);
             }

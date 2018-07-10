@@ -1,7 +1,5 @@
 package com.andela.omokolataiwo.levelup.presenter;
 
-
-import android.support.v7.widget.LinearLayoutManager;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -15,7 +13,6 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 public class GithubProfilePresenter {
     private Context context;
@@ -25,9 +22,12 @@ public class GithubProfilePresenter {
     }
 
     public void updateAdapter(final RecyclerView recyclerView) {
-        RetrofitClientInstance.getRetrofitClientInstance().getAllProfile().enqueue(new Callback<GithubProfileResponse>() {
+        RetrofitClientInstance.getRetrofitClientInstance()
+                .getAllProfile()
+                .enqueue(new Callback<GithubProfileResponse>() {
             @Override
-            public void onResponse(@NonNull Call<GithubProfileResponse> call, @NonNull Response<GithubProfileResponse> response) {
+            public void onResponse(@NonNull Call<GithubProfileResponse> call,
+                                   @NonNull Response<GithubProfileResponse> response) {
                 List<GithubProfile> githubProfiles = response.body().getGithubProfiles();
 
                 if (githubProfiles != null)

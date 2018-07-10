@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply from: './code_quality/quality.gradle' // TODO is ./ really necessary when compare with /
 
 android {
     compileSdkVersion 27
