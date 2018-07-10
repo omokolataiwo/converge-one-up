@@ -9,11 +9,29 @@ import android.widget.TextView;
 import com.andela.omokolataiwo.levelup.R;
 import com.squareup.picasso.Picasso;
 
+/**
+ * Detail activity that display detailed github profile.
+ */
 public class DetailActivity extends AppCompatActivity {
+    /**
+     * user's account name text view.
+     */
     TextView mUsernameTextView;
+    /**
+     * user's url path text view.
+     */
     TextView mUserUrlTextView;
+    /**
+     * user's image view.
+     */
     ImageView mProfileImageView;
+    /**
+     * username, profile image and url.
+     */
     String mUsername, mProfileImage, mUserUrl;
+    /**
+     * Intent to get data from the parent activity.
+     */
     Intent intent;
 
     @Override
@@ -27,6 +45,9 @@ public class DetailActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(mUsername);
     }
 
+    /**
+     * Display user's details from intent.
+     */
     private void viewProfile() {
         intent = this.getIntent();
 

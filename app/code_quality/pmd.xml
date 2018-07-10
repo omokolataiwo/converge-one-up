@@ -13,9 +13,6 @@
     <rule ref="rulesets/java/imports.xml">
         <exclude name="TooManyStaticImports"/>
     </rule>
-    <rule ref="rulesets/java/design.xml">
-        <exclude name="UncommentedEmptyMethodBody"/>
-    </rule>
     <rule ref="rulesets/java/unusedcode.xml"/>
     <rule ref="rulesets/java/junit.xml"/>
     <rule ref="rulesets/java/logging-java.xml"/>

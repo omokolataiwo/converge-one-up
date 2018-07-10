@@ -17,17 +17,20 @@ task checkstyle(type: Checkstyle) {
 }
 
 task pmd(type: Pmd) {
-    description 'Run PMD'
     group 'verification'
+
+    ignoreFailures = false
+    ruleSets = []
+
     ruleSetFiles = files("./code_quality/pmd.xml")
-    source 'src'
+    source = fileTree('src/main/java')
     include '**/*.java'
     exclude '**/gen/**'
+
     reports {
         xml.enabled = false
         html.enabled = true
     }
-    ignoreFailures = false
 }
 
 task findbugs(type: FindBugs) {

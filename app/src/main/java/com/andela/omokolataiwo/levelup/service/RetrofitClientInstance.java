@@ -3,17 +3,35 @@ package com.andela.omokolataiwo.levelup.service;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class RetrofitClientInstance {
-    private static Retrofit retrofit;
+/**
+ * Retrofit client instance.
+ */
+public final class RetrofitClientInstance {
+    /**
+     * retrofit.
+     */
+    /**
+     * Base URL.
+     */
     private static final String BASE_URL = "https://api.github.com/";
 
-    public static GithubAPI getRetrofitClientInstance() {
-        if (retrofit == null) {
-            retrofit = new Retrofit.Builder()
-                    .baseUrl(BASE_URL).addConverterFactory(GsonConverterFactory.create())
-                    .build();
-        }
+    /**
+     *
+     */
+    private RetrofitClientInstance() {
+        //
+    }
 
-        return retrofit.create(GithubAPI.class);
+    /**
+     * Constructor.
+     *
+     * @return GithubAPI Github API.
+     */
+
+    public static GithubAPI getRetrofitClientInstance() {
+        return new Retrofit.Builder()
+                .baseUrl(BASE_URL).addConverterFactory(GsonConverterFactory.create())
+                .build()
+                .create(GithubAPI.class);
     }
 }

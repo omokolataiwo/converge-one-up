@@ -1,6 +1,5 @@
 package com.andela.omokolataiwo.levelup;
 
-import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -17,13 +16,22 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+/**
+ * ListAdapter populate the recycler view base on response from github API.
+ */
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
-    private List<GithubProfile> userProfilesDataSet;
-    private Context context;
+    /**
+     * User profile from Github.
+     */
+    private final List<GithubProfile> userProfilesDataSet;
 
-    public ListAdapter(List<GithubProfile> itemList, Context context) {
+    /**
+     * ListAdapter constructor.
+     *
+     * @param itemList Item from Github response
+     */
+    public ListAdapter(List<GithubProfile> itemList) {
         this.userProfilesDataSet = itemList;
-        this.context = context;
     }
 
     @NonNull
@@ -47,12 +55,12 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, DetailActivity.class);
+                Intent intent = new Intent(view.getContext(), DetailActivity.class);
                 intent.putExtra("username", username);
                 intent.putExtra("profile image", profileImage);
                 intent.putExtra("profile url", profileUrl);
 
-                context.startActivity(intent);
+                view.getContext().startActivity(intent);
             }
         });
     }
@@ -62,10 +70,24 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         return userProfilesDataSet.size();
     }
 
+    /**
+     * Update recycler view components.
+     */
     public class ViewHolder extends RecyclerView.ViewHolder {
+        /**
+         * Profile image view.
+         */
         public CircleImageView profilePictureImageView;
+        /**
+         * Username text view.
+         */
         public TextView usernameTextView;
 
+        /**
+         * Constructor.
+         *
+         * @param itemView An Item
+         */
         public ViewHolder(View itemView) {
             super(itemView);
             profilePictureImageView = itemView.findViewById(R.id.img_user_profile);
