@@ -1,8 +1,12 @@
 package com.andela.omokolataiwo.levelup.view;
 
 import android.content.Intent;
+import android.support.v4.app.ShareCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -60,4 +64,26 @@ public class DetailActivity extends AppCompatActivity {
         Picasso.get().load(mProfileImage).into(mProfileImageView);
     }
 
+    /**
+     * @return the IntentBuilder
+     */
+    private Intent createShareIntent() {
+        StringBuilder shareMessage = new StringBuilder();
+        shareMessage.append(getResources().getString(R.string.message))
+                .append(mUsername).append(", ").append(mUserUrl);
+
+        return ShareCompat.IntentBuilder.from(this)
+                .setType("text/plain")
+                .setText(shareMessage)
+                .getIntent();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.share_profile, menu);
+        MenuItem menuItem = menu.findItem(R.id.share_profile);
+        menuItem.setIntent(createShareIntent());
+        return true;
+    }
 }
