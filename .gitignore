@@ -6,3 +6,9 @@
 /build
 /captures
 .externalNativeBuild
+.hgignore
+instapk.properties
+instapk.log
+instapk.log.lck
+.idea/instapk.xml
+instapk.log*

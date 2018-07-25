@@ -1,0 +1,63 @@
+apply plugin: 'checkstyle'
+apply plugin: 'pmd'
+apply plugin: 'findbugs'
+
+task checkstyle(type: Checkstyle) {
+    description 'Check code standard'
+    group 'verification'
+
+    configFile file('./code_quality/checkstyle.xml')
+    configProperties.checkstyleSuppressionsPath = file("./code_quality//suppressions.xml").absolutePath
+    source 'src'
+    include '**/*.java'
+    exclude '**/gen/**'
+
+    classpath = files()
+    ignoreFailures = false
+}
+
+task pmd(type: Pmd) {
+    group 'verification'
+
+    ignoreFailures = false
+    ruleSets = []
+
+    ruleSetFiles = files("./code_quality/pmd.xml")
+    source = fileTree('src/main/java')
+    include '**/*.java'
+    exclude '**/gen/**'
+
+    reports {
+        xml.enabled = false
+        html.enabled = true
+    }
+}
+
+task findbugs(type: FindBugs) {
+    description 'Run findbugs'
+    group 'verification'
+    classes = files("$project.buildDir/intermediates/classes")
+    source 'src'
+    classpath = files()
+    effort 'max'
+    reportLevel = "high"
+    excludeFilter file('./code_quality/findbugs-exclude.xml')
+    reports {
+        xml.enabled = false
+        html.enabled = true
+    }
+    ignoreFailures = false
+}
+
+android {
+    lintOptions {
+        abortOnError true
+        quiet true
+        lintConfig file("./code_quality/lint.xml")
+        xmlReport false
+        htmlReport true
+    }
+}
+
+// Add checkstyle, findbugs, pmd and lint as dependencies to the inbuilt android 'check' task.
+check.dependsOn 'checkstyle', 'findbugs', 'pmd', 'lint'
