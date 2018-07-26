@@ -50,7 +50,9 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         final String profileUrl = itemList.getHtmlUrl();
 
         holder.usernameTextView.setText(username);
-        Picasso.get().load(profileImage).into(holder.profilePictureImageView);
+        Picasso.get().load(profileImage)
+                .placeholder(R.drawable.developer_default_img)
+                .into(holder.profilePictureImageView);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

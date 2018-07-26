@@ -6,16 +6,26 @@ import retrofit2.converter.gson.GsonConverterFactory;
 /**
  * Retrofit client instance.
  */
-public final class RetrofitClientInstance {
+public final class RetrofitClient {
     /**
      * Base URL.
      */
     private static final String BASE_URL = "https://api.github.com/";
 
     /**
+     * Retrofit Github API.
+     */
+    private static GithubAPI instance = new Retrofit
+            .Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(GithubAPI.class);
+
+    /**
      * private RetrofitClientInstance constructor as singleton.
      */
-    private RetrofitClientInstance() {
+    private RetrofitClient() {
         // left blank intentionally. Singleton design pattern.
     }
 
@@ -25,12 +35,7 @@ public final class RetrofitClientInstance {
      * @return GithubAPI Github API.
      */
 
-    public static GithubAPI getRetrofitClientInstance() {
-        return new Retrofit
-                .Builder()
-                .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-                .create(GithubAPI.class);
+    public static GithubAPI getInstance() {
+        return instance;
     }
 }
