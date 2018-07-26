@@ -1,6 +1,9 @@
 package com.andela.omokolataiwo.levelup.view;
 
+import android.os.Handler;
 import android.os.Parcelable;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -32,20 +35,40 @@ public class MainActivity extends AppCompatActivity implements MainContract.Main
      */
     private List<GithubProfile> githubProfilesParcel;
 
-    /**
-     * github profile presenter.
-     */
-    private final GithubProfilePresenter githubProfilePresenter =
-            new GithubProfilePresenter(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         recyclerView = findViewById(R.id.recycler_view);
+        final SwipeRefreshLayout swipeRefreshLayout = findViewById(
+                R.id.main_activity_swipe_refresh);
+
+        final GithubProfilePresenter githubProfilePresenter = new GithubProfilePresenter(this,
+                (CoordinatorLayout) findViewById(R.id.coordinatorLayout));
+
+        swipeRefreshLayout.setColorSchemeResources(
+                R.color.refresh_red,
+                R.color.refresh_blue,
+                R.color.refresh_green
+        );
+        swipeRefreshLayout.setSize(SwipeRefreshLayout.LARGE);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                swipeRefreshLayout.setRefreshing(true);
+                (new Handler()).postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        swipeRefreshLayout.setRefreshing(false);
+                    }
+                }, 3000);
+                githubProfilePresenter.fetchData();
+            }
+        });
+
         if (savedInstanceState != null) {
-            githubProfilesParcel = savedInstanceState
-                    .getParcelableArrayList(PARCEL_KEY);
+            githubProfilesParcel = savedInstanceState.getParcelableArrayList(PARCEL_KEY);
             displayDeveloperList(githubProfilesParcel);
         } else {
             githubProfilePresenter.fetchData();
@@ -55,8 +78,8 @@ public class MainActivity extends AppCompatActivity implements MainContract.Main
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putParcelableArrayList(
-                PARCEL_KEY, (ArrayList<? extends Parcelable>) githubProfilesParcel);
+        outState.putParcelableArrayList(PARCEL_KEY,
+                (ArrayList<? extends Parcelable>) githubProfilesParcel);
     }
 
     @Override

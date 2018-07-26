@@ -8,18 +8,15 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public final class RetrofitClientInstance {
     /**
-     * retrofit.
-     */
-    /**
      * Base URL.
      */
     private static final String BASE_URL = "https://api.github.com/";
 
     /**
-     *
+     * private RetrofitClientInstance constructor as singleton.
      */
     private RetrofitClientInstance() {
-        //
+        // left blank intentionally. Singleton design pattern.
     }
 
     /**
@@ -29,8 +26,10 @@ public final class RetrofitClientInstance {
      */
 
     public static GithubAPI getRetrofitClientInstance() {
-        return new Retrofit.Builder()
-                .baseUrl(BASE_URL).addConverterFactory(GsonConverterFactory.create())
+        return new Retrofit
+                .Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
                 .build()
                 .create(GithubAPI.class);
     }
