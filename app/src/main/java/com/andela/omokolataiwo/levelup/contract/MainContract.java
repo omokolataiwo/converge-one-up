@@ -14,9 +14,23 @@ public interface MainContract {
     interface MainView {
         /**
          * Display developer list.
+         *
          * @param githubProfiles Github profiles.
          */
         void displayDeveloperList(List<GithubProfile> githubProfiles);
+
+        /**
+         * Display notification to the user.
+         *
+         * @param message Message to be displayed
+         */
+        void showNotification(String message);
+
+        /**
+         * Hide swipe when done.
+         * @param status Status of the request. True it's successful, False it failed
+         */
+        void hideSwipe(boolean status);
     }
 
     /**
