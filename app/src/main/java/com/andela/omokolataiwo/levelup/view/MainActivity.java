@@ -16,6 +16,7 @@ import com.andela.omokolataiwo.levelup.R;
 import com.andela.omokolataiwo.levelup.contract.MainContract;
 import com.andela.omokolataiwo.levelup.models.GithubProfile;
 import com.andela.omokolataiwo.levelup.presenter.GithubProfilePresenter;
+import com.andela.omokolataiwo.levelup.util.EspressoIdlingResource;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,6 +63,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.Main
             githubProfilesParcel = savedInstanceState.getParcelableArrayList(PARCEL_KEY);
             displayDeveloperList(githubProfilesParcel);
         } else {
+            EspressoIdlingResource.increment();
             githubProfilePresenter.fetchData();
         }
     }
@@ -75,6 +77,9 @@ public class MainActivity extends AppCompatActivity implements MainContract.Main
 
     @Override
     public void displayDeveloperList(List<GithubProfile> githubProfiles) {
+        if (githubProfilesParcel == null) {
+            EspressoIdlingResource.decrement();
+        }
         githubProfilesParcel = githubProfiles;
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));

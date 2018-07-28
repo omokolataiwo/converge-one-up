@@ -1,4 +1,4 @@
-package com.andela.omokolataiwo.myapplication;
+package com.andela.omokolataiwo.levelup;
 
 import org.junit.Test;
 
