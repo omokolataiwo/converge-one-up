@@ -6,8 +6,8 @@ import android.support.test.espresso.intent.rule.IntentsTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
 import com.andela.omokolataiwo.levelup.util.EspressoIdlingResource;
-import com.andela.omokolataiwo.levelup.view.DetailActivity;
-import com.andela.omokolataiwo.levelup.view.MainActivity;
+import com.andela.omokolataiwo.levelup.userDetail.view.DetailActivity;
+import com.andela.omokolataiwo.levelup.home.view.MainActivity;
 
 import org.junit.After;
 import org.junit.Before;

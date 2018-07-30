@@ -25,3 +25,22 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+ext {
+    supportVersion = "27.1.1"
+    constraintLayoutVersion = "1.1.2"
+    cardViewVersion = "27.1.1"
+    recyclerViewVersion = "27.1.1"
+    designVersion = "27.1.1"
+    circleImageVersion = "2.2.0"
+    picassoVersion = "2.71828"
+    retrofitVersion = "2.4.0"
+    converterGsonVersion = "2.4.0"
+    okHTTPVersion = "1.1.0"
+    annotationsVersion = "27.1.1"
+    espressoVersion = "27.1.1"
+    espressoCoreVersion = "3.0.2"
+    espressoContribVersion = "3.0.2"
+    espressoIdlingResourceVersion = "3.0.2"
+    exifInterfaceVersion = "27.1.1"
+}

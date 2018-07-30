@@ -1,4 +1,4 @@
-package com.andela.omokolataiwo.levelup.models;
+package com.andela.omokolataiwo.levelup.home.models;
 
 import com.google.gson.annotations.SerializedName;
 
