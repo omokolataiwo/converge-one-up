@@ -1,4 +1,4 @@
-package com.andela.omokolataiwo.levelup;
+package com.andela.omokolataiwo.levelup.home.adapter;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -8,8 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.andela.omokolataiwo.levelup.models.GithubProfile;
-import com.andela.omokolataiwo.levelup.view.DetailActivity;
+import com.andela.omokolataiwo.levelup.R;
+import com.andela.omokolataiwo.levelup.home.models.GithubProfile;
+import com.andela.omokolataiwo.levelup.userDetail.view.DetailActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;

@@ -1,6 +1,6 @@
 package com.andela.omokolataiwo.levelup.contract;
 
-import com.andela.omokolataiwo.levelup.models.GithubProfile;
+import com.andela.omokolataiwo.levelup.home.models.GithubProfile;
 
 import java.util.List;
 
@@ -8,39 +8,48 @@ import java.util.List;
  * Main Contract.
  */
 public interface MainContract {
+  /**
+   * MainView Contract.
+   */
+  interface MainView {
     /**
-     * MainView Contract.
+     * Display developer list.
+     *
+     * @param githubProfiles Github profiles.
      */
-    interface MainView {
-        /**
-         * Display developer list.
-         *
-         * @param githubProfiles Github profiles.
-         */
-        void displayDeveloperList(List<GithubProfile> githubProfiles);
-
-        /**
-         * Display notification to the user.
-         *
-         * @param message Message to be displayed
-         */
-        void showNotification(String message);
-
-        /**
-         * Hide swipe when done.
-         * @param status Status of the request. True it's successful, False it failed
-         */
-        void hideSwipe(boolean status);
-    }
+    void displayDeveloperList(List<GithubProfile> githubProfiles);
 
     /**
-     * MainPresenter Contract.
+     * Display notification to the user.
+     *
+     * @param message Message to be displayed
      */
-    interface MainPresenter {
-        /**
-         * Fetch data from endpoint.
-         */
-        void fetchData();
-    }
+    void showNotification(String message);
+
+    /**
+     * Hide swipe when done.
+     *
+     * @param status Status of the request. True it's successful, False it failed
+     */
+    void hideSwipe(boolean status);
+
+    /**
+     * Gets network connection state.
+     *
+     * @return the network connection state
+     */
+    boolean getNetworkConnectionState();
+  }
+
+  /**
+   * MainPresenter Contract.
+   */
+  interface MainPresenter {
+    /**
+     * Fetch data from endpoint.
+     */
+    void fetchData();
+
+  }
 
 }

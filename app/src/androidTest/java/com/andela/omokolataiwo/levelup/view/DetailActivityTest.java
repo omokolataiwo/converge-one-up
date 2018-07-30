@@ -7,6 +7,7 @@ import android.support.test.espresso.intent.rule.IntentsTestRule;
 import android.util.Log;
 
 import com.andela.omokolataiwo.levelup.R;
+import com.andela.omokolataiwo.levelup.userDetail.view.DetailActivity;
 
 import org.hamcrest.Matcher;
 import org.junit.Before;
@@ -28,7 +29,6 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.CoreMatchers.anyOf;
 import static org.hamcrest.core.AllOf.allOf;
-import static org.junit.Assert.*;
 
 /**
  * Test detail activity.

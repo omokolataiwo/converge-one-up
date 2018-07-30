@@ -1,4 +1,4 @@
-package com.andela.omokolataiwo.levelup.view;
+package com.andela.omokolataiwo.levelup.userDetail.view;
 
 import android.content.Intent;
 import android.support.v4.app.ShareCompat;
