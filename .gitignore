@@ -12,3 +12,4 @@ instapk.log
 instapk.log.lck
 .idea/instapk.xml
 instapk.log*
+build-cache/
