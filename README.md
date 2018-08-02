@@ -85,7 +85,7 @@ are willing to follow set standards for contributing.
 Yes, there are set conventions for PRs to this repository and can be found in the
 project wiki.
 ```
-[Project Wiki](https://github.com/Abudu-Samuel/JavaDevelopers/wiki)
+[Project Wiki](https://github.com/omokolataiwo/converge-one-up/wiki)
 
 
 ### [](https://github.com/Abudu-Samuel/JavaDevelopers/#what-language-was-used-to-develop-this-application)What language was used to develop this application?
