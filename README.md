@@ -30,7 +30,7 @@ Java Developers application leverages:
 -   Install  [`Java JDK`](http://www.oracle.com/technetwork/java/javase/downloads/index.html), version 8 or later
 -   Clone the repository:
 
-> $ git clone https://github.com/omokolataiwo/converge-one-up
+> $ git clone https://github.com/omokolataiwo/converge-one-up.git
 
 -   Change directory into converge-one-up directory
 
