@@ -1,40 +1,44 @@
 package com.andela.omokolataiwo.levelup.home.presenter;
 
-import android.support.annotation.NonNull;
 
 import com.andela.omokolataiwo.levelup.contract.MainContract;
 import com.andela.omokolataiwo.levelup.home.models.GithubProfile;
-import com.andela.omokolataiwo.levelup.home.models.GithubProfileResponse;
-import com.andela.omokolataiwo.levelup.service.RetrofitClient;
 
 import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 /**
  * Github Profile Presenter.
  */
-public class GithubProfilePresenter implements MainContract.MainPresenter {
+public class GithubProfilePresenter implements MainContract.MainPresenter,
+  MainContract.GetGithubProfileIntractor.OnFinishedListener {
   /**
    * View context of the presenter.
    */
   private final MainContract.MainView mView;
 
   /**
+   * Get Github Profile Intractor.
+   */
+  private final MainContract.GetGithubProfileIntractor getGithubProfileIntractor;
+
+  /**
    * GithubProfilePresenter constructor.
    *
-   * @param view Activity of the request.
+   * @param view                      Activity of the request.
+   * @param getGithubProfileIntractor the get github profile intractor
    */
-  public GithubProfilePresenter(MainContract.MainView view) {
+  public GithubProfilePresenter(MainContract.MainView view,
+                                MainContract.GetGithubProfileIntractor getGithubProfileIntractor) {
     this.mView = view;
+    this.getGithubProfileIntractor = getGithubProfileIntractor;
   }
 
-  @Override
+
   /**
-   * Fetches Github users' profile for Github API
+   * Fetches Github users' profile for Github API.
    */
+  @Override
   public void fetchData() {
     if (!mView.getNetworkConnectionState()) {
       mView.showNotification("No Network Connection");
@@ -42,22 +46,18 @@ public class GithubProfilePresenter implements MainContract.MainPresenter {
       return;
     }
 
-    RetrofitClient.getInstance().getAllProfile()
-      .enqueue(new Callback<GithubProfileResponse>() {
-        @Override
-        public void onResponse(@NonNull Call<GithubProfileResponse> call,
-                               @NonNull Response<GithubProfileResponse> response) {
-          List<GithubProfile> githubProfiles = response.body().getGithubProfiles();
-          mView.displayDeveloperList(githubProfiles);
-          mView.hideSwipe(true);
-        }
-
-        @Override
-        public void onFailure(@NonNull Call<GithubProfileResponse> call, Throwable t) {
-          mView.showNotification("Slow network connection. Please try again.");
-          mView.hideSwipe(false);
-        }
-      });
+    getGithubProfileIntractor.getGithubProfileArrayList(this);
   }
 
+  @Override
+  public void onFinished(List<GithubProfile> githubProfiles) {
+    mView.displayDeveloperList(githubProfiles);
+    mView.hideSwipe(true);
+  }
+
+  @Override
+  public void onFailure(Throwable throwable) {
+    mView.showNotification("Slow network connection. Please try again.");
+    mView.hideSwipe(false);
+  }
 }

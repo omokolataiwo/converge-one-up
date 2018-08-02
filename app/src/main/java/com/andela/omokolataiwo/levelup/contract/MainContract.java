@@ -49,7 +49,37 @@ public interface MainContract {
      * Fetch data from endpoint.
      */
     void fetchData();
+  }
 
+  /**
+   * The interface Get Profile Intractor.
+   */
+  interface GetGithubProfileIntractor {
+    /**
+     * Gets github profile array list.
+     *
+     * @param listener the listener
+     */
+    void getGithubProfileArrayList(OnFinishedListener listener);
+
+    /**
+     * The interface on finished listener.
+     */
+    interface OnFinishedListener {
+      /**
+       * On finished.
+       *
+       * @param githubProfiles the github profiles
+       */
+      void onFinished(List<GithubProfile> githubProfiles);
+
+      /**
+       * On failure.
+       *
+       * @param throwable the throwable error
+       */
+      void onFailure(Throwable throwable);
+    }
   }
 
 }
