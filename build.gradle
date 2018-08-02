@@ -43,4 +43,6 @@ ext {
     espressoContribVersion = "3.0.2"
     espressoIdlingResourceVersion = "3.0.2"
     exifInterfaceVersion = "27.1.1"
+    assertCoreVersion = "3.8.0"
+    mockitoVersion = "2.5.4"
 }

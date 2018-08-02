@@ -1,5 +1,6 @@
 package com.andela.omokolataiwo.levelup.home.view;
 
+import android.content.Intent;
 import android.os.Parcelable;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -11,11 +12,14 @@ import android.support.v7.widget.RecyclerView;
 import android.support.design.widget.Snackbar;
 import android.widget.Toast;
 
+import com.andela.omokolataiwo.levelup.contract.RecyclerItemClickListener;
 import com.andela.omokolataiwo.levelup.home.adapter.ListAdapter;
 import com.andela.omokolataiwo.levelup.R;
 import com.andela.omokolataiwo.levelup.contract.MainContract;
+import com.andela.omokolataiwo.levelup.home.models.GetGithubProfileIntractor;
 import com.andela.omokolataiwo.levelup.home.models.GithubProfile;
 import com.andela.omokolataiwo.levelup.home.presenter.GithubProfilePresenter;
+import com.andela.omokolataiwo.levelup.userDetail.view.DetailActivity;
 import com.andela.omokolataiwo.levelup.util.Connectivity;
 import com.andela.omokolataiwo.levelup.util.EspressoIdlingResource;
 
@@ -56,8 +60,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.Main
 
     recyclerView = findViewById(R.id.recycler_view);
     swipeRefreshLayout = findViewById(R.id.main_activity_swipe_refresh);
-    githubProfilePresenter = new GithubProfilePresenter(this);
-
+    githubProfilePresenter = new GithubProfilePresenter(this, new GetGithubProfileIntractor());
     setupSwipeRefresh();
 
     if (savedInstanceState != null) {
@@ -85,7 +88,18 @@ public class MainActivity extends AppCompatActivity implements MainContract.Main
     githubProfilesParcel = githubProfiles;
     recyclerView.setHasFixedSize(true);
     recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
-    recyclerView.setAdapter(new ListAdapter(githubProfiles));
+    recyclerView.setAdapter(new ListAdapter(githubProfiles,
+      new RecyclerItemClickListener() {
+
+        @Override
+        public void onItemClick(GithubProfile githubProfile) {
+          Intent intent = new Intent(MainActivity.this, DetailActivity.class);
+          intent.putExtra("username", githubProfile.getLogin());
+          intent.putExtra("profile image", githubProfile.getAvatarUrl());
+          intent.putExtra("profile url", githubProfile.getHtmlUrl());
+          startActivity(intent);
+        }
+      }));
   }
 
   @Override
